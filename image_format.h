@@ -2,6 +2,7 @@
 #include <vector>
 #include <cstdint>
 #include <string>
+#include <cstring>
 
 
 
@@ -30,7 +31,20 @@ struct Image {
 	Image(const int w, const int h, const int bpp);
 
 	// set a pixel
-	void set(const int x, const int y, Color& color);
+	// inline void set(const int x, const int y, Color& color);
+
+	inline void set(const int x, const int y, Color& color) {
+		// set color
+		if (!pixels.size() || x < 0 || y < 0 || x >= w || y >= h) return;
+
+		int pixel_index = y * w + x;
+		int offsetbytes = pixel_index * bytes_per_pixel;
+
+		
+		// move the color value into the pixel's offset
+		memcpy(pixels.data() + offsetbytes, color.bgra, bytes_per_pixel);//
+
+	}
 
 	// write to file
 	void write_file(const std::string filename) const;
