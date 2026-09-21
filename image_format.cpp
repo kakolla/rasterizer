@@ -55,7 +55,7 @@ void Image::write_file(const std::string filename) const {
 	header[14] = h & 0xFF;
 	header[15] = (h >> 8) & 0xFF;
 	header[16] = bytes_per_pixel * 8;// bits
-	header[17] = 0x20; // top left image origin
+	header[17] = 0x00; // bottom left image origin
 
 	ofile.write(reinterpret_cast<const char*>(header), 18);
 
