@@ -19,7 +19,7 @@ Color blue = {255, 0, 0, 255};
 
 extern void line(int ax, int ay, int bx, int by, Image& framebuffer, Color& color );
 
-extern const int width = 768;
+extern const int width = 1024;
 extern const int height = 1024;
 
 

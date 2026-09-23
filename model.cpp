@@ -77,6 +77,14 @@ Model::Model(std::string file_name) {
 }
 
 
+std::pair<int, int> Model::project(vec3 v) {
+	return {
+		(v.x + 1.0) * width/2,
+		(v.y + 1.0) * height/2
+	};
+}
+
+
 void Model::write_to_file(Image& framebuffer, std::string ofile_name) {
 	// shift to 0,0 and normalize
 	float rangex = largest_x - smallest_x;
@@ -84,22 +92,26 @@ void Model::write_to_file(Image& framebuffer, std::string ofile_name) {
 	if (!rangex) rangex = 1;
 	if (!rangey) rangey = 1;
 
-	for (auto& [x,y,_] : pts) {
-		x = ((x - smallest_x) / rangex) * width;
-		y = ((y - smallest_y) / rangey) * height;
-		// std::cout << x << " " << y << std::endl;
-		// exit(0);
-	}
+	// for (auto& [x,y,_] : pts) {
+	// 	x = ((x - smallest_x) / rangex) * width;
+	// 	y = ((y - smallest_y) / rangey) * height;
+	// 	// std::cout << x << " " << y << std::endl;
+	// 	// exit(0);
+	// }
+
+	
 	// std::cout << "abi" << std::endl;
 	// std::cout << std::get<0>(pts[0]) << std::endl;
 
 	for (auto& [e1, e2] : edges) {
 		// the line e1 to e2
-		int ax = pts[e1-1].x;
-		int ay = pts[e1-1].y;
+		auto [ax,ay] = project(pts[e1-1]);
+		// int ax = pts[e1-1].x;
+		// int ay = pts[e1-1].y;
+		auto [bx,by] = project(pts[e2-1]);
 
-		int bx = pts[e2-1].x;
-		int by = pts[e2-1].y;
+		// int bx = pts[e2-1].x;
+		// int by = pts[e2-1].y;
 		// std::cout << "drawing a line from"  << ax << " " << ay << " to " << bx << " " << by << std::endl;
 		line(ax, ay, bx, by, framebuffer, red);
 	}

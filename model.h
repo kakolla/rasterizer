@@ -40,6 +40,9 @@ public:
 	// void write_to_file(Image& frame_buffer, std::string ofile_name);
 
 	void write_to_file(Image& framebuffer, std::string ofile_name = "framebuffer.tga");
+	
+	
+	std::pair<int, int> project(vec3 v); // proj onto xy
 
 
 	std::vector<vec3> pts;
