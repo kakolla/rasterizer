@@ -28,6 +28,7 @@ int main(int argc, char** argv) {
 
 	// read file
 	Model m("obj/diablo3_pose.obj");
+	// Model m("obj/skull.obj");
 	m.write_to_file(framebuffer);
 
 

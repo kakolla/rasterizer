@@ -92,12 +92,12 @@ void Model::write_to_file(Image& framebuffer, std::string ofile_name) {
 	if (!rangex) rangex = 1;
 	if (!rangey) rangey = 1;
 
-	// for (auto& [x,y,_] : pts) {
-	// 	x = ((x - smallest_x) / rangex) * width;
-	// 	y = ((y - smallest_y) / rangey) * height;
-	// 	// std::cout << x << " " << y << std::endl;
-	// 	// exit(0);
-	// }
+	for (auto& [x,y,_] : pts) {
+		x = ((x - smallest_x) / rangex) * width;
+		y = ((y - smallest_y) / rangey) * height;
+		// std::cout << x << " " << y << std::endl;
+		// exit(0);
+	}
 
 	
 	// std::cout << "abi" << std::endl;
@@ -105,13 +105,13 @@ void Model::write_to_file(Image& framebuffer, std::string ofile_name) {
 
 	for (auto& [e1, e2] : edges) {
 		// the line e1 to e2
-		auto [ax,ay] = project(pts[e1-1]);
-		// int ax = pts[e1-1].x;
-		// int ay = pts[e1-1].y;
-		auto [bx,by] = project(pts[e2-1]);
+		// auto [ax,ay] = project(pts[e1-1]);
+		int ax = pts[e1-1].x;
+		int ay = pts[e1-1].y;
+		// auto [bx,by] = project(pts[e2-1]);
 
-		// int bx = pts[e2-1].x;
-		// int by = pts[e2-1].y;
+		int bx = pts[e2-1].x;
+		int by = pts[e2-1].y;
 		// std::cout << "drawing a line from"  << ax << " " << ay << " to " << bx << " " << by << std::endl;
 		line(ax, ay, bx, by, framebuffer, red);
 	}
